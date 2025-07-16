@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shipping Quote | Your Company Name</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background: url('https://i.ibb.co/nNnq2SSN/elias-l-Yi5-Qg0x-P0-unsplash.png') no-repeat center center;
+            background-size: cover;
+            opacity: 0.9;
+            /* background: url();
+            background-color: #f5f5f5;
+            color: #333; */
+        }
+                /* body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding-top: 80px; /* Account for fixed header */
+        /* } */ 
+
+        /* Fixed Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #333;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo img {
+            border-radius: 50px;
+            width: 30px;
+            opacity: 0.7;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: #667eea;
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #333;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            color: white;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Container */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px 40px;
+        }
+
+        /* Form Styling */
+        #quoteForm {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .form-section {
+            margin-bottom: 40px;
+        }
+
+        .form-section h2 {
+            color: #333;
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-section h2 i {
+            color: #667eea;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .dimensions-input {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+            transform: scale(1.2);
+        }
+
+        .checkbox-group label {
+            margin: 0;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 18px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-book {
+            background: #28a745;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background 0.3s ease;
+        }
+
+        .btn-book:hover {
+            background: #218838;
+        }
+
+        #quoteResult {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 30px;
+            border: 2px solid #667eea;
+        }
+
+        #quoteResult h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        #quoteAmount {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #28a745;
+            margin-bottom: 10px;
+        }
+
+        #quoteDetails {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Tablet Styles */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            #quoteForm {
+                padding: 30px 25px;
+            }
+
+            .dimensions-input {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .nav-menu {
+                gap: 20px;
+            }
+
+            .nav-menu a {
+                font-size: 0.9rem;
+            }
+
+            .nav-cta {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 480px) {
+            body {
+                padding-top: 70px;
+            }
+
+            .nav-container {
+                padding: 0 15px;
+                height: 60px;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                gap: 15px;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .nav-cta {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .hero {
+                padding: 40px 15px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .container {
+                padding: 0 15px 30px;
+            }
+
+            #quoteForm {
+                padding: 25px 20px;
+                border-radius: 15px;
+            }
+
+            .form-section h2 {
+                font-size: 1.3rem;
+            }
+
+            .form-group input,
+            .form-group select {
+                padding: 12px;
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+
+            .dimensions-input {
+                grid-template-columns: 1fr;
+            }
+
+            .checkbox-group {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .checkbox-group input[type="checkbox"] {
+                margin-right: 8px;
+            }
+
+            #quoteAmount {
+                font-size: 2rem;
+            }
+
+            .logo {
+                font-size: 1.3rem;
+            }
+
+            .logo img {
+                width: 25px;
+            }
+        }
+
+        /* Extra small screens */
+        @media (max-width: 360px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            #quoteForm {
+                padding: 20px 15px;
+            }
+
+            .form-section h2 {
+                font-size: 1.2rem;
+            }
+
+            #quoteAmount {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Large screens */
+        @media (min-width: 1200px) {
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+
+            .hero p {
+                font-size: 1.3rem;
+            }
+
+            #quoteForm {
+                padding: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <nav class="nav-container">
+            <a href="#" class="logo">
+                <img src="https://www.animoticons.com/files/day-by-day/every-day-smiley-faces/57.gif" alt="Stork Deliveries Logo">
+                Stork Deliveries
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="newstork.html#home">Home</a></li>
+                <li><a href="newstork.html#services">Services</a></li>
+                <li><a href="trackingstork.html">Track</a></li>
+                <li><a href="newstork.html#about">About</a></li>
+                <li><a href="newstork.html#contact">Contact</a></li>
+            </ul>
+            <a href="get-quote.html" class="nav-cta">Get Quote</a>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </div>
+
+    <header class="hero">
+        <h1>Get a Shipping Quote</h1>
+        <p>Fill in your shipment details for an instant estimate</p>
+    </header>
+
+    <div class="container">
+        <form id="quoteForm">
+            <!-- Shipment Details -->
+            <div class="form-section">
+                <h2><i class="fas fa-shipping-fast"></i> Shipment Details</h2>
+                <div class="form-group">
+                    <label for="origin">Origin (City/Port)</label>
+                    <input type="text" id="origin" required>
+                </div>
+                <div class="form-group">
+                    <label for="destination">Destination (City/Port)</label>
+                    <input type="text" id="destination" required>
+                </div>
+                <div class="form-group">
+                    <label for="transportMode">Transport Mode</label>
+                    <select id="transportMode" required>
+                        <option value="">Select...</option>
+                        <option value="ocean">Ocean Freight</option>
+                        <option value="air">Air Freight</option>
+                        <option value="road">Road Freight</option>
+                        <option value="rail">Rail Freight</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Cargo Information -->
+            <div class="form-section">
+                <h2><i class="fas fa-box-open"></i> Cargo Details</h2>
+                <div class="form-group">
+                    <label for="cargoType">Cargo Type</label>
+                    <select id="cargoType" required>
+                        <option value="">Select...</option>
+                        <option value="general">General Goods</option>
+                        <option value="perishable">Perishable Goods</option>
+                        <option value="hazardous">Hazardous Materials</option>
+                        <option value="oversized">Oversized Cargo</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="weight">Total Weight (kg)</label>
+                    <input type="number" id="weight" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="dimensions">Dimensions (L × W × H in cm)</label>
+                    <div class="dimensions-input">
+                        <input type="number" id="length" placeholder="Length" min="1" required>
+                        <input type="number" id="width" placeholder="Width" min="1" required>
+                        <input type="number" id="height" placeholder="Height" min="1" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Services -->
+            <div class="form-section">
+                <h2><i class="fas fa-cogs"></i> Additional Services</h2>
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="insurance">
+                    <label for="insurance">Cargo Insurance (+$50)</label>
+                </div>
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="express">
+                    <label for="express">Express Delivery (+20% of base rate)</label>
+                </div>
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="customs">
+                    <label for="customs">Customs Clearance (+$100)</label>
+                </div>
+            </div>
+
+            <!-- Submit & Results -->
+            <button type="submit" class="btn-submit">Get Quote</button>
+            <div id="quoteResult" class="hidden">
+                <h3>Your Estimated Quote</h3>
+                <p id="quoteAmount">$0.00</p>
+                <p id="quoteDetails">Base rate: $0.00 | Additional services: $0.00</p>
+                <button class="btn-book">Book Now</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            const icon = mobileMenuToggle.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-container')) {
+                navMenu.classList.remove('active');
+                const icon = mobileMenuToggle.querySelector('i');
+                icon.classList.add('fa-bars');
+                icon.classList.remove('fa-times');
+            }
+        });
+
+        // Quote calculation (basic example)
+        document.getElementById('quoteForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const weight = parseFloat(document.getElementById('weight').value) || 0;
+            const length = parseFloat(document.getElementById('length').value) || 0;
+            const width = parseFloat(document.getElementById('width').value) || 0;
+            const height = parseFloat(document.getElementById('height').value) || 0;
+            const transportMode = document.getElementById('transportMode').value;
+            
+            // Basic calculation
+            let baseRate = 0;
+            const volume = (length * width * height) / 1000000; // Convert to cubic meters
+            
+            switch(transportMode) {
+                case 'ocean':
+                    baseRate = Math.max(weight * 2, volume * 100);
+                    break;
+                case 'air':
+                    baseRate = Math.max(weight * 8, volume * 500);
+                    break;
+                case 'road':
+                    baseRate = Math.max(weight * 3, volume * 150);
+                    break;
+                case 'rail':
+                    baseRate = Math.max(weight * 1.5, volume * 80);
+                    break;
+            }
+            
+            let additionalServices = 0;
+            if (document.getElementById('insurance').checked) additionalServices += 50;
+            if (document.getElementById('express').checked) additionalServices += baseRate * 0.2;
+            if (document.getElementById('customs').checked) additionalServices += 100;
+            
+            const total = baseRate + additionalServices;
+            
+            document.getElementById('quoteAmount').textContent = `$${total.toFixed(2)}`;
+            document.getElementById('quoteDetails').textContent = `Base rate: $${baseRate.toFixed(2)} | Additional services: $${additionalServices.toFixed(2)}`;
+            document.getElementById('quoteResult').classList.remove('hidden');
+            
+            // Smooth scroll to results
+            document.getElementById('quoteResult').scrollIntoView({
+                behavior: 'smooth',
+                block: 'nearest'
+            });
+        });
+    </script>
+</body>
+</html>

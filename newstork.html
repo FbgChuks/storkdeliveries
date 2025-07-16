@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Stork Deliveries - Fast, reliable shipping services worldwide with real-time tracking and competitive rates.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📦</text></svg>">
+    <title>Stork Deliveries - Fast, Reliable Shipping Worldwide</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --text-color: #333;
+            --text-light: #64748b;
+            --bg-dark: #1e293b;
+            --bg-darker: #0f172a;
+            --white: #ffffff;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: var(--transition);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo img {
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            object-fit: contain;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .mobile-menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: var(--text-color);
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: url('https://images.unsplash.com/photo-1609143739217-01b60dad1c67?w=1400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGRlbGl2ZXJ5fGVufDB8fDB8fHww') no-repeat center center;
+            background-size: cover;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="%23ffffff08" points="0,0 1000,300 1000,1000 0,700"/><polygon fill="%23ffffff05" points="0,200 1000,0 1000,800 0,1000"/></svg>') center/cover;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            text-align: center;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--white);
+            color: var(--primary-color);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-secondary:hover {
+            background: var(--white);
+            color: var(--primary-color);
+        }
+
+        .hero-visual {
+            position: relative;
+            height: 400px;
+        }
+
+        .floating-card {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-card:nth-child(1) {
+            top: 50px;
+            left: 50px;
+            animation-delay: 0s;
+        }
+
+        .floating-card:nth-child(2) {
+            top: 150px;
+            right: 30px;
+            animation-delay: 2s;
+        }
+
+        .floating-card:nth-child(3) {
+            bottom: 80px;
+            left: 100px;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Track Package Section */
+        .track-section {
+            padding: 4rem 0;
+            background: #f8fafc;
+        }
+
+        .track-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0 2rem;
+        }
+
+        .track-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #1e293b;
+        }
+
+        .track-section p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .track-form {
+            display: flex;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .track-input {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .track-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 6rem 0;
+            background: var(--white);
+        }
+
+        .services-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #1e293b;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1e293b;
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 0;
+            background: var(--bg-dark);
+            color: var(--white);
+        }
+
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .feature-item h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-item p {
+            color: #94a3b8;
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: var(--white);
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-darker);
+            color: var(--white);
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #334155;
+            padding-top: 1rem;
+            text-align: center;
+            color: var(--text-light);
+        }
+
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Scroll animations */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background: var(--white);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 2rem;
+                transition: var(--transition);
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .track-form {
+                flex-direction: column;
+            }
+
+            .hero-visual {
+                height: 300px;
+                margin-top: 2rem;
+            }
+        }
+
+        /* Accessibility focus styles */
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible {
+            outline: 2px solid var(--primary-color);
+            outline-offset: 2px;
+        }
+
+        /* Skip to content link for keyboard users */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--primary-color);
+            color: white;
+            padding: 8px;
+            z-index: 100;
+            transition: top 0.3s;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container" aria-label="Main navigation">
+            <a href="#" class="logo">
+                <img src="https://www.animoticons.com/files/day-by-day/every-day-smiley-faces/57.gif" alt="Stork Deliveries logo" width="30" height="30">
+                Stork Deliveries
+            </a>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu" role="menu">
+                <li role="none"><a href="#home" role="menuitem">Home</a></li>
+                <li role="none"><a href="#services" role="menuitem">Services</a></li>
+                <li role="none"><a href="trackingstork.html" role="menuitem">Track</a></li>
+                <li role="none"><a href="#about" role="menuitem">About</a></li>
+                <li role="none"><a href="#contact" role="menuitem">Contact</a></li>
+                <li role="none"><a href="get-quote.html" class="nav-cta" role="menuitem">Get Quote</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-container">
+                <div class="hero-content fade-in">
+                    <h1>Deliver Anywhere, Anytime</h1>
+                    <p>Experience lightning-fast shipping with real-time tracking. From documents to packages, we deliver with precision and care across the globe.</p>
+                                        <div class="hero-actions">
+                        <a href="get-quote.html" class="btn-primary">Ship Now</a>
+                        <a href="trackingstork.html" class="btn-secondary">Track Package</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="floating-card">
+                        <strong>📦 Package #STK123456</strong><br>
+                        <small>In Transit → Los Angeles</small>
+                    </div>
+                    <div class="floating-card">
+                        <strong>🚚 Express Delivery</strong><br>
+                        <small>2-Day Shipping Available</small>
+                    </div>
+                    <div class="floating-card">
+                        <strong>📍 Global Network</strong><br>
+                        <small>200+ Countries Served</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+        <!-- Track Package Section -->
+        <section id="track" class="track-section">
+            <div class="track-container scroll-reveal">
+                <h2>Track Your Package</h2>
+                <p>Enter your tracking number below to get real-time updates on your shipment</p>
+                <form class="track-form" id="trackingForm">
+                    <input type="text" class="track-input" id="homepageTrackingNumber" placeholder="Enter tracking number (e.g., STK123456)" required aria-label="Tracking number">
+                    <button type="submit" class="btn-primary">Track Package</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="services">
+            <div class="services-container">
+                <h2 class="section-title scroll-reveal">Our Services</h2>
+                <div class="services-grid">
+                    <div class="service-card scroll-reveal">
+                        <span class="service-icon" aria-hidden="true">🚀</span>
+                        <h3>Express Delivery</h3>
+                        <p>Get your packages delivered within 24-48 hours with our express shipping service. Perfect for urgent documents and time-sensitive deliveries.</p>
+                    </div>
+                    <div class="service-card scroll-reveal">
+                        <span class="service-icon" aria-hidden="true">🌍</span>
+                        <h3>International Shipping</h3>
+                        <p>Ship to over 200 countries worldwide with competitive rates and reliable delivery times. Full customs handling included.</p>
+                    </div>
+                    <div class="service-card scroll-reveal">
+                        <span class="service-icon" aria-hidden="true">📦</span>
+                        <h3>Bulk Shipping</h3>
+                        <p>Special rates for businesses shipping large volumes. Dedicated account management and streamlined processes for enterprise clients.</p>
+                    </div>
+                    <div class="service-card scroll-reveal">
+                        <span class="service-icon" aria-hidden="true">🔒</span>
+                        <h3>Secure Shipping</h3>
+                        <p>High-value and sensitive items shipped with enhanced security measures, insurance coverage, and signature confirmation.</p>
+                    </div>
+                    <div class="service-card scroll-reveal">
+                        <span class="service-icon" aria-hidden="true">❄️</span>
+                        <h3>Temperature Control</h3>
+                        <p>Cold chain logistics for pharmaceuticals, food items, and temperature-sensitive products with continuous monitoring.</p>
+                    </div>
+                    <div class="service-card scroll-reveal">
+                        <span class="service-icon" aria-hidden="true">📱</span>
+                        <h3>Smart Tracking</h3>
+                        <p>Real-time GPS tracking, delivery notifications, and customer portal access. Know exactly where your package is at all times.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features" id="features">
+            <div class="features-container">
+                <h2 class="section-title scroll-reveal">Why Choose Stork Deliveries?</h2>
+                <div class="features-grid">
+                    <div class="feature-item scroll-reveal">
+                        <span class="feature-icon" aria-hidden="true">⚡</span>
+                        <h3>Lightning Fast</h3>
+                        <p>Same-day pickup and express delivery options available</p>
+                    </div>
+                    <div class="feature-item scroll-reveal">
+                        <span class="feature-icon" aria-hidden="true">🛡️</span>
+                        <h3>Secure & Insured</h3>
+                        <p>Full insurance coverage and secure handling protocols</p>
+                    </div>
+                    <div class="feature-item scroll-reveal">
+                        <span class="feature-icon" aria-hidden="true">💰</span>
+                        <h3>Competitive Pricing</h3>
+                        <p>Best rates in the market with no hidden fees</p>
+                    </div>
+                    <div class="feature-item scroll-reveal">
+                        <span class="feature-icon" aria-hidden="true">🎯</span>
+                        <h3>99.9% Reliability</h3>
+                        <p>Industry-leading delivery success rate</p>
+                    </div>
+                    <div class="feature-item scroll-reveal">
+                        <span class="feature-icon" aria-hidden="true">📞</span>
+                        <h3>24/7 Support</h3>
+                        <p>Round-the-clock customer service and support</p>
+                    </div>
+                    <div class="feature-item scroll-reveal">
+                        <span class="feature-icon" aria-hidden="true">🌱</span>
+                        <h3>Eco-Friendly</h3>
+                        <p>Carbon-neutral shipping options available</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats" id="stats">
+            <div class="stats-container">
+                <div class="stats-grid">
+                    <div class="stat-item scroll-reveal">
+                        <h3>2M+</h3>
+                        <p>Packages Delivered</p>
+                    </div>
+                    <div class="stat-item scroll-reveal">
+                        <h3>200+</h3>
+                        <p>Countries Served</p>
+                    </div>
+                    <div class="stat-item scroll-reveal">
+                        <h3>50K+</h3>
+                        <p>Happy Customers</p>
+                    </div>
+                    <div class="stat-item scroll-reveal">
+                        <h3>99.9%</h3>
+                        <p>Delivery Success</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>🏺 Stork Deliveries</h3>
+                    <p>Your trusted partner for fast, reliable shipping worldwide. Delivering excellence since 2020.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#services">Express Delivery</a></li>
+                        <li><a href="#services">International Shipping</a></li>
+                        <li><a href="#services">Bulk Shipping</a></li>
+                        <li><a href="#services">Secure Shipping</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="trackingstork.html">Track Package</a></li>
+                        <li><a href="#contact">Customer Support</a></li>
+                        <li><a href="#services">Shipping Guide</a></li>
+                        <li><a href="#contact">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#about">Careers</a></li>
+                        <li><a href="#about">Press</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Stork Deliveries. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle functionality
+        (function() {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const navMenu = document.getElementById('navMenu');
+
+            function toggleMenu() {
+                const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+                mobileMenuToggle.setAttribute('aria-expanded', !isExpanded);
+                mobileMenuToggle.classList.toggle('active');
+                navMenu.classList.toggle('active');
+                
+                // Prevent body scroll when menu is open
+                document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : 'auto';
+            }
+
+            mobileMenuToggle.addEventListener('click', toggleMenu);
+
+            // Close mobile menu when clicking on a link
+            document.querySelectorAll('.nav-menu a').forEach(link => {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth <= 768) {
+                        toggleMenu();
+                    }
+                });
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!navMenu.contains(event.target) && !mobileMenuToggle.contains(event.target) && navMenu.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+
+            // Handle window resize
+            function handleResize() {
+                if (window.innerWidth > 768 && navMenu.classList.contains('active')) {
+                    toggleMenu();
+                }
+            }
+
+            window.addEventListener('resize', handleResize);
+        })();
+
+        // Smooth scrolling for navigation links
+        (function() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const target = document.querySelector(targetId);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        
+                        // Update URL without page jump
+                        if (history.pushState) {
+                            history.pushState(null, null, targetId);
+                        } else {
+                            location.hash = targetId;
+                        }
+                    }
+                });
+            });
+        })();
+
+        // Scroll reveal animation
+        (function() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.scroll-reveal').forEach(el => {
+                observer.observe(el);
+            });
+        })();
+
+        // Header background on scroll
+        (function() {
+            const header = document.querySelector('.header');
+            if (!header) return;
+
+            function updateHeader() {
+                if (window.scrollY > 100) {
+                    header.style.background = 'rgba(255, 255, 255, 0.98)';
+                    header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+                } else {
+                    header.style.background = 'rgba(255, 255, 255, 0.95)';
+                    header.style.boxShadow = 'none';
+                }
+            }
+
+            window.addEventListener('scroll', updateHeader);
+            updateHeader(); // Initialize
+        })();
+
+        // Tracking form submission
+        (function() {
+            const trackingForm = document.getElementById('trackingForm');
+            if (!trackingForm) return;
+
+            function handleTrackingSubmit(e) {
+                e.preventDefault();
+                const trackingNumber = document.getElementById('homepageTrackingNumber').value.trim();
+                
+                if (trackingNumber) {
+                    window.location.href = `trackingstork.html?tracking=${encodeURIComponent(trackingNumber)}`;
+                } else {
+                    alert("Please enter a valid tracking number");
+                    document.getElementById('homepageTrackingNumber').focus();
+                }
+            }
+
+            trackingForm.addEventListener('submit', handleTrackingSubmit);
+        })();
+
+        // Animate stats on scroll
+        (function() {
+            const statsSection = document.querySelector('.stats');
+            if (!statsSection) return;
+
+            function animateValue(item, finalValue, duration) {
+                const start = 0;
+                const startTime = performance.now();
+                const isPercentage = finalValue.includes('%');
+                const numValue = isPercentage ? 
+                    parseFloat(finalValue) : 
+                    parseInt(finalValue.replace(/[^\d]/g, ''));
+
+                function updateValue(timestamp) {
+                    const progress = Math.min((timestamp - startTime) / duration, 1);
+                    const current = Math.floor(progress * numValue);
+                    
+                    if (isPercentage) {
+                        item.textContent = `${current}%`;
+                    } else {
+                        item.textContent = finalValue.replace(/[\d,]+/, current.toLocaleString());
+                    }
+
+                    if (progress < 1) {
+                        requestAnimationFrame(updateValue);
+                    }
+                }
+
+                requestAnimationFrame(updateValue);
+            }
+
+            const statsObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const statItems = entry.target.querySelectorAll('.stat-item h3');
+                        statItems.forEach(item => {
+                            const finalValue = item.textContent;
+                            const isNumber = !isNaN(parseInt(finalValue.replace(/[^\d]/g, '')));
+                            
+                            if (isNumber) {
+                                animateValue(item, finalValue, 1000);
+                            }
+                        });
+                        statsObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            statsObserver.observe(statsSection);
+        })();
+    </script>
+</body>
+</html>

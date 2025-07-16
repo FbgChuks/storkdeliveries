@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stork Deliveries - Package Tracking</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        .logo {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .tracking-input {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .tracking-input input {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .tracking-input input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .tracking-result {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tracking-result.show {
+            display: block;
+        }
+
+        .package-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .info-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .status-timeline {
+            margin-top: 20px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 40px;
+            margin-bottom: 20px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            background: #667eea;
+            border-radius: 50%;
+        }
+
+        .timeline-item.completed::before {
+            background: #28a745;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 19px;
+            top: 15px;
+            width: 2px;
+            height: 40px;
+            background: #e0e0e0;
+        }
+
+        .timeline-item:last-child::after {
+            display: none;
+        }
+
+        .timeline-date {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .timeline-status {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .timeline-location {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .error-message {
+            background: #ff6b6b;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .package-info {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">🏺 Stork Deliveries</div>
+            <div class="tagline">Fast, Reliable, Tracked</div>
+        </div>
+
+        <div class="card">
+            <h2>Track Your Package</h2>
+            <div class="tracking-input">
+                <input type="text" id="trackingNumber" placeholder="Enter tracking number (e.g., STK123456)" maxlength="20">
+                <button class="btn" onclick="trackPackage()">Track Package</button>
+            </div>
+            
+            <div id="errorMessage" class="error-message"></div>
+            
+            <div id="trackingResult" class="tracking-result">
+                <div class="package-info">
+                    <div class="info-item">
+                        <div class="info-label">Tracking Number</div>
+                        <div class="info-value" id="packageId"></div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Status</div>
+                        <div class="info-value" id="packageStatus"></div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">From</div>
+                        <div class="info-value" id="packageFrom"></div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">To</div>
+                        <div class="info-value" id="packageTo"></div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Estimated Delivery</div>
+                        <div class="info-value" id="packageEta"></div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Weight</div>
+                        <div class="info-value" id="packageWeight"></div>
+                    </div>
+                </div>
+                
+                <div class="status-timeline">
+                    <h3>Tracking History</h3>
+                    <div id="timelineContainer"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mock database - in production, this would be replaced with real API calls
+        let packages = {
+            'STK123456': {
+                id: 'STK123456',
+                status: 'in_transit',
+                from: 'New York, NY',
+                to: 'Los Angeles, CA',
+                weight: '2.5 kg',
+                eta: '2025-07-12',
+                timeline: [
+                    { date: '2025-07-06 10:00', status: 'Package Created', location: 'New York, NY', completed: true },
+                    { date: '2025-07-06 14:30', status: 'Picked Up', location: 'New York, NY', completed: true },
+                    { date: '2025-07-07 09:15', status: 'In Transit', location: 'Philadelphia, PA', completed: true },
+                    { date: '2025-07-08 11:45', status: 'In Transit', location: 'Chicago, IL', completed: true },
+                    { date: '2025-07-10 16:00', status: 'Out for Delivery', location: 'Los Angeles, CA', completed: false },
+                    { date: '2025-07-12 18:00', status: 'Delivered', location: 'Los Angeles, CA', completed: false }
+                ]
+            },
+            'STK789012': {
+                id: 'STK789012',
+                status: 'delivered',
+                from: 'Miami, FL',
+                to: 'Seattle, WA',
+                weight: '1.2 kg',
+                eta: '2025-07-05',
+                timeline: [
+                    { date: '2025-07-01 08:00', status: 'Package Created', location: 'Miami, FL', completed: true },
+                    { date: '2025-07-01 12:00', status: 'Picked Up', location: 'Miami, FL', completed: true },
+                    { date: '2025-07-02 14:30', status: 'In Transit', location: 'Atlanta, GA', completed: true },
+                    { date: '2025-07-03 10:15', status: 'In Transit', location: 'Denver, CO', completed: true },
+                    { date: '2025-07-04 16:45', status: 'Out for Delivery', location: 'Seattle, WA', completed: true },
+                    { date: '2025-07-05 14:22', status: 'Delivered', location: 'Seattle, WA', completed: true }
+                ]
+            }
+        };
+
+        function trackPackage() {
+            const trackingNumber = document.getElementById('trackingNumber').value.trim().toUpperCase();
+            const errorDiv = document.getElementById('errorMessage');
+            const resultDiv = document.getElementById('trackingResult');
+            
+            // Clear previous messages
+            errorDiv.style.display = 'none';
+            resultDiv.classList.remove('show');
+            
+            if (!trackingNumber) {
+                showError('Please enter a tracking number');
+                return;
+            }
+            
+            // Simulate API call delay
+            setTimeout(() => {
+                const packageData = packages[trackingNumber];
+                
+                if (!packageData) {
+                    showError('Package not found. Please check your tracking number.');
+                    return;
+                }
+                
+                // Populate package information
+                document.getElementById('packageId').textContent = packageData.id;
+                document.getElementById('packageStatus').textContent = formatStatus(packageData.status);
+                document.getElementById('packageFrom').textContent = packageData.from;
+                document.getElementById('packageTo').textContent = packageData.to;
+                document.getElementById('packageEta').textContent = formatDate(packageData.eta);
+                document.getElementById('packageWeight').textContent = packageData.weight;
+                
+                // Build timeline
+                const timelineContainer = document.getElementById('timelineContainer');
+                timelineContainer.innerHTML = '';
+                
+                packageData.timeline.forEach(item => {
+                    const timelineItem = document.createElement('div');
+                    timelineItem.className = `timeline-item ${item.completed ? 'completed' : ''}`;
+                    timelineItem.innerHTML = `
+                        <div class="timeline-date">${formatDateTime(item.date)}</div>
+                        <div class="timeline-status">${item.status}</div>
+                        <div class="timeline-location">${item.location}</div>
+                    `;
+                    timelineContainer.appendChild(timelineItem);
+                });
+                
+                resultDiv.classList.add('show');
+            }, 500);
+        }
+
+        function trackPackage(trackingNumber = null) {
+            const inputField = document.getElementById('trackingNumber');
+            const numberToTrack = trackingNumber || inputField.value.trim();
+            
+            setTimeout(() => {
+                const packageData = packages[trackingNumber];
+                
+                if (!packageData) {
+                    showError('Package not found. Please check your tracking number.');
+                    return;
+                }
+                
+                // Populate package information
+                document.getElementById('packageId').textContent = packageData.id;
+                document.getElementById('packageStatus').textContent = formatStatus(packageData.status);
+                document.getElementById('packageFrom').textContent = packageData.from;
+                document.getElementById('packageTo').textContent = packageData.to;
+                document.getElementById('packageEta').textContent = formatDate(packageData.eta);
+                document.getElementById('packageWeight').textContent = packageData.weight;
+                
+                // Build timeline
+                const timelineContainer = document.getElementById('timelineContainer');
+                timelineContainer.innerHTML = '';
+                
+                packageData.timeline.forEach(item => {
+                    const timelineItem = document.createElement('div');
+                    timelineItem.className = `timeline-item ${item.completed ? 'completed' : ''}`;
+                    timelineItem.innerHTML = `
+                        <div class="timeline-date">${formatDateTime(item.date)}</div>
+                        <div class="timeline-status">${item.status}</div>
+                        <div class="timeline-location">${item.location}</div>
+                    `;
+                    timelineContainer.appendChild(timelineItem);
+                });
+                
+                resultDiv.classList.add('show');
+            }, 500);
+        }
+
+        // Auto-trigger on page load if URL has tracking number
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const trackingNumber = urlParams.get('tracking');
+            
+            if (trackingNumber) {
+                document.getElementById('trackingNumber').value = trackingNumber;
+                trackPackage(trackingNumber); // Auto-trigger tracking
+            }
+        };
+
+        function formatStatus(status) {
+            const statusMap = {
+                'pending': 'Pending',
+                'picked_up': 'Picked Up',
+                'in_transit': 'In Transit',
+                'out_for_delivery': 'Out for Delivery',
+                'delivered': 'Delivered'
+            };
+            return statusMap[status] || status;
+        }
+
+        function formatDate(dateString) {
+            return new Date(dateString).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+
+        function formatDateTime(dateString) {
+            return new Date(dateString).toLocaleString('en-US', {
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            setTimeout(() => {
+                errorDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        // Allow Enter key to trigger tracking
+        document.getElementById('trackingNumber').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                trackPackage();
+            }
+        });
+    </script>
+</body>
+</html>
