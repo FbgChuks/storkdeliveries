@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Stork Deliveries - Fast, reliable shipping services worldwide with real-time tracking and competitive rates.">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📦</text></svg>">
+    <meta name="description"
+        content="Stork Deliveries - Fast, reliable shipping services worldwide with real-time tracking and competitive rates.">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📦</text></svg>">
     <title>Stork Deliveries - Fast, Reliable Shipping Worldwide</title>
     <style>
         :root {
@@ -206,8 +209,13 @@
         }
 
         .btn-primary {
-            background: var(--white);
-            color: var(--primary-color);
+            background: white;
+            color: #2563eb;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
             border: none;
             cursor: pointer;
         }
@@ -219,13 +227,18 @@
 
         .btn-secondary {
             background: transparent;
-            color: var(--white);
-            border: 2px solid var(--white);
+            color: white;
+            padding: 1rem 2rem;
+            border: 2px solid white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
         }
 
         .btn-secondary:hover {
-            background: var(--white);
-            color: var(--primary-color);
+            background: white;
+            color: #2563eb;
         }
 
         .hero-visual {
@@ -262,8 +275,15 @@
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
         }
 
         /* Track Package Section */
@@ -506,8 +526,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Scroll animations */
@@ -593,28 +620,40 @@
         }
     </style>
 </head>
+
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
-    
+
     <!-- Header -->
     <header class="header">
         <nav class="nav-container" aria-label="Main navigation">
             <a href="#" class="logo">
-                <img src="https://www.animoticons.com/files/day-by-day/every-day-smiley-faces/57.gif" alt="Stork Deliveries logo" width="30" height="30">
+                <img src="https://www.animoticons.com/files/day-by-day/every-day-smiley-faces/57.gif"
+                    alt="Stork Deliveries logo" width="30" height="30">
                 Stork Deliveries
             </a>
-            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navMenu">
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu" aria-expanded="false"
+                aria-controls="navMenu">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
-            <ul class="nav-menu" id="navMenu" role="menu">
+            <!-- <ul class="nav-menu" id="navMenu" role="menu">
                 <li role="none"><a href="#home" role="menuitem">Home</a></li>
                 <li role="none"><a href="#services" role="menuitem">Services</a></li>
                 <li role="none"><a href="trackingstork.html" role="menuitem">Track</a></li>
                 <li role="none"><a href="#about" role="menuitem">About</a></li>
                 <li role="none"><a href="#contact" role="menuitem">Contact</a></li>
                 <li role="none"><a href="get-quote.html" class="nav-cta" role="menuitem">Get Quote</a></li>
+            </ul> -->
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="trackingstork.html">Track</a></li>
+                <li><a href="#features">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="get-quote.html" class="nav-cta">Get Quote</a></li>
             </ul>
         </nav>
     </header>
@@ -626,8 +665,9 @@
             <div class="hero-container">
                 <div class="hero-content fade-in">
                     <h1>Deliver Anywhere, Anytime</h1>
-                    <p>Experience lightning-fast shipping with real-time tracking. From documents to packages, we deliver with precision and care across the globe.</p>
-                                        <div class="hero-actions">
+                    <p>Experience lightning-fast shipping with real-time tracking. From documents to packages, we
+                        deliver with precision and care across the globe.</p>
+                    <div class="hero-actions">
                         <a href="get-quote.html" class="btn-primary">Ship Now</a>
                         <a href="trackingstork.html" class="btn-secondary">Track Package</a>
                     </div>
@@ -648,14 +688,15 @@
                 </div>
             </div>
         </section>
-    
+
         <!-- Track Package Section -->
         <section id="track" class="track-section">
             <div class="track-container scroll-reveal">
                 <h2>Track Your Package</h2>
                 <p>Enter your tracking number below to get real-time updates on your shipment</p>
                 <form class="track-form" id="trackingForm">
-                    <input type="text" class="track-input" id="homepageTrackingNumber" placeholder="Enter tracking number (e.g., STK123456)" required aria-label="Tracking number">
+                    <input type="text" class="track-input" id="homepageTrackingNumber"
+                        placeholder="Enter tracking number (e.g., STK123456)" required aria-label="Tracking number">
                     <button type="submit" class="btn-primary">Track Package</button>
                 </form>
             </div>
@@ -669,32 +710,38 @@
                     <div class="service-card scroll-reveal">
                         <span class="service-icon" aria-hidden="true">🚀</span>
                         <h3>Express Delivery</h3>
-                        <p>Get your packages delivered within 24-48 hours with our express shipping service. Perfect for urgent documents and time-sensitive deliveries.</p>
+                        <p>Get your packages delivered within 24-48 hours with our express shipping service. Perfect for
+                            urgent documents and time-sensitive deliveries.</p>
                     </div>
                     <div class="service-card scroll-reveal">
                         <span class="service-icon" aria-hidden="true">🌍</span>
                         <h3>International Shipping</h3>
-                        <p>Ship to over 200 countries worldwide with competitive rates and reliable delivery times. Full customs handling included.</p>
+                        <p>Ship to over 200 countries worldwide with competitive rates and reliable delivery times. Full
+                            customs handling included.</p>
                     </div>
                     <div class="service-card scroll-reveal">
                         <span class="service-icon" aria-hidden="true">📦</span>
                         <h3>Bulk Shipping</h3>
-                        <p>Special rates for businesses shipping large volumes. Dedicated account management and streamlined processes for enterprise clients.</p>
+                        <p>Special rates for businesses shipping large volumes. Dedicated account management and
+                            streamlined processes for enterprise clients.</p>
                     </div>
                     <div class="service-card scroll-reveal">
                         <span class="service-icon" aria-hidden="true">🔒</span>
                         <h3>Secure Shipping</h3>
-                        <p>High-value and sensitive items shipped with enhanced security measures, insurance coverage, and signature confirmation.</p>
+                        <p>High-value and sensitive items shipped with enhanced security measures, insurance coverage,
+                            and signature confirmation.</p>
                     </div>
                     <div class="service-card scroll-reveal">
                         <span class="service-icon" aria-hidden="true">❄️</span>
                         <h3>Temperature Control</h3>
-                        <p>Cold chain logistics for pharmaceuticals, food items, and temperature-sensitive products with continuous monitoring.</p>
+                        <p>Cold chain logistics for pharmaceuticals, food items, and temperature-sensitive products with
+                            continuous monitoring.</p>
                     </div>
                     <div class="service-card scroll-reveal">
                         <span class="service-icon" aria-hidden="true">📱</span>
                         <h3>Smart Tracking</h3>
-                        <p>Real-time GPS tracking, delivery notifications, and customer portal access. Know exactly where your package is at all times.</p>
+                        <p>Real-time GPS tracking, delivery notifications, and customer portal access. Know exactly
+                            where your package is at all times.</p>
                     </div>
                 </div>
             </div>
@@ -801,14 +848,15 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Stork Deliveries. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+                <p>&copy; 2025 Stork Deliveries. All rights reserved. | <a href="#">Privacy Policy</a> | <a
+                        href="#">Terms of Service</a></p>
             </div>
         </div>
     </footer>
 
     <script>
         // Mobile menu toggle functionality
-        (function() {
+        (function () {
             const mobileMenuToggle = document.getElementById('mobileMenuToggle');
             const navMenu = document.getElementById('navMenu');
 
@@ -817,7 +865,7 @@
                 mobileMenuToggle.setAttribute('aria-expanded', !isExpanded);
                 mobileMenuToggle.classList.toggle('active');
                 navMenu.classList.toggle('active');
-                
+
                 // Prevent body scroll when menu is open
                 document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : 'auto';
             }
@@ -826,7 +874,7 @@
 
             // Close mobile menu when clicking on a link
             document.querySelectorAll('.nav-menu a').forEach(link => {
-                link.addEventListener('click', function() {
+                link.addEventListener('click', function () {
                     if (window.innerWidth <= 768) {
                         toggleMenu();
                     }
@@ -834,7 +882,7 @@
             });
 
             // Close mobile menu when clicking outside
-            document.addEventListener('click', function(event) {
+            document.addEventListener('click', function (event) {
                 if (!navMenu.contains(event.target) && !mobileMenuToggle.contains(event.target) && navMenu.classList.contains('active')) {
                     toggleMenu();
                 }
@@ -851,20 +899,20 @@
         })();
 
         // Smooth scrolling for navigation links
-        (function() {
+        (function () {
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
+                anchor.addEventListener('click', function (e) {
                     e.preventDefault();
                     const targetId = this.getAttribute('href');
                     if (targetId === '#') return;
-                    
+
                     const target = document.querySelector(targetId);
                     if (target) {
                         target.scrollIntoView({
                             behavior: 'smooth',
                             block: 'start'
                         });
-                        
+
                         // Update URL without page jump
                         if (history.pushState) {
                             history.pushState(null, null, targetId);
@@ -877,7 +925,7 @@
         })();
 
         // Scroll reveal animation
-        (function() {
+        (function () {
             const observerOptions = {
                 threshold: 0.1,
                 rootMargin: '0px 0px -50px 0px'
@@ -897,7 +945,7 @@
         })();
 
         // Header background on scroll
-        (function() {
+        (function () {
             const header = document.querySelector('.header');
             if (!header) return;
 
@@ -916,14 +964,14 @@
         })();
 
         // Tracking form submission
-        (function() {
+        (function () {
             const trackingForm = document.getElementById('trackingForm');
             if (!trackingForm) return;
 
             function handleTrackingSubmit(e) {
                 e.preventDefault();
                 const trackingNumber = document.getElementById('homepageTrackingNumber').value.trim();
-                
+
                 if (trackingNumber) {
                     window.location.href = `trackingstork.html?tracking=${encodeURIComponent(trackingNumber)}`;
                 } else {
@@ -936,7 +984,7 @@
         })();
 
         // Animate stats on scroll
-        (function() {
+        (function () {
             const statsSection = document.querySelector('.stats');
             if (!statsSection) return;
 
@@ -944,14 +992,14 @@
                 const start = 0;
                 const startTime = performance.now();
                 const isPercentage = finalValue.includes('%');
-                const numValue = isPercentage ? 
-                    parseFloat(finalValue) : 
+                const numValue = isPercentage ?
+                    parseFloat(finalValue) :
                     parseInt(finalValue.replace(/[^\d]/g, ''));
 
                 function updateValue(timestamp) {
                     const progress = Math.min((timestamp - startTime) / duration, 1);
                     const current = Math.floor(progress * numValue);
-                    
+
                     if (isPercentage) {
                         item.textContent = `${current}%`;
                     } else {
@@ -973,7 +1021,7 @@
                         statItems.forEach(item => {
                             const finalValue = item.textContent;
                             const isNumber = !isNaN(parseInt(finalValue.replace(/[^\d]/g, '')));
-                            
+
                             if (isNumber) {
                                 animateValue(item, finalValue, 1000);
                             }
@@ -987,4 +1035,5 @@
         })();
     </script>
 </body>
+
 </html>
